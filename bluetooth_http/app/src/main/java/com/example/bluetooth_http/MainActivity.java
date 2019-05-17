@@ -2,6 +2,7 @@ package com.example.bluetooth_http;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -53,20 +54,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        TextView tv = findViewById(R.id.textView);
+        final TextView tv = findViewById(R.id.textView);
         Log.i("carmenlog","click");
         //Get the test case parameter strings
+
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                String beaconList;
+                beaconList = IBeaconScanner.indoorLocation;
+                tv.setText(beaconList);
+            }
+        }, 7000);
+
         try {
 
             //Create bluetooth scanner
             testCase = new IBeaconScanner(this, .5);
             testCase.start(5);
-            //TimeUnit.SECONDS.sleep(5);
-            //String beaconList= testCase.getBeaconsString();
-            String beaconList;
-            beaconList = IBeaconScanner.beaconList.toString();
-            Log.i("carmenlog",beaconList);
-            tv.setText(beaconList);
+
         }
         catch(Exception e) {
             finish();

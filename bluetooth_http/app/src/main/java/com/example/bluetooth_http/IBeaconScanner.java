@@ -58,6 +58,7 @@ public class IBeaconScanner extends TimerTask implements BeaconConsumer {
     private boolean finished;
     private HttpTx httptx = new HttpTx();
     public static Json json = new Json();
+    public static String indoorLocation;
 
 
     IBeaconScanner(Context context, double period) {
@@ -81,7 +82,9 @@ public class IBeaconScanner extends TimerTask implements BeaconConsumer {
         return beaconList.toString();
     }
 
-
+    public String getIndoorLocation(){
+        return this.indoorLocation;
+    }
 
     public void start(int scan_period) {
         try {
@@ -125,8 +128,8 @@ public class IBeaconScanner extends TimerTask implements BeaconConsumer {
         }
         try {
             Log.i("carmenlog","http req json: "+json.readMyJson());
-            String res = httptx.HttpGetRequest(json.readMyJson());
-            Log.i("carmenlog[RESULT]",res);
+            indoorLocation = httptx.HttpGetRequest(json.readMyJson());
+            Log.i("carmenlog[RESULT]",indoorLocation);
         } catch (JSONException e) {
             e.printStackTrace();
         }
