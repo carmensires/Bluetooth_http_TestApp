@@ -36,7 +36,7 @@ public class HttpTx {
         }
     }
 
-    public void HttpGetRequest(String json) {
+    public String HttpGetRequest(String json) {
 
         String urlfinal = url+json;
 
@@ -52,6 +52,8 @@ public class HttpTx {
             Log.d("carmenlog[ERROR inter]",e.toString());
             e.printStackTrace();
         }
+
+        return result;
 
     }
 }

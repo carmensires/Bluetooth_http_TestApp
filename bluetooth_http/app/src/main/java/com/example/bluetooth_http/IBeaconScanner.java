@@ -125,7 +125,8 @@ public class IBeaconScanner extends TimerTask implements BeaconConsumer {
         }
         try {
             Log.i("carmenlog","http req json: "+json.readMyJson());
-            httptx.HttpGetRequest(json.readMyJson());
+            String res = httptx.HttpGetRequest(json.readMyJson());
+            Log.i("carmenlog[RESULT]",res);
         } catch (JSONException e) {
             e.printStackTrace();
         }
